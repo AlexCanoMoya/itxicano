@@ -6,49 +6,82 @@
     <title>Para Mi Amor 💖</title>
     <style>
         body { text-align: center; font-family: Arial, sans-serif; background-color: black; color: white; }
-        img { max-width: 90%; height: auto; border-radius: 10px; margin-top: 20px; }
+        img, video { max-width: 90%; height: auto; border-radius: 10px; margin-top: 20px; }
         button { margin: 10px; padding: 10px 20px; font-size: 18px; cursor: pointer; border: none; border-radius: 5px; }
         .prev { background-color: gray; color: white; }
         .next { background-color: red; color: white; }
+        .play { background-color: green; color: white; }
+        .footer { margin-top: 20px; font-size: 16px; color: lightgray; }
     </style>
 </head>
 <body>
     <h1>💖 Momentos Juntos 💖</h1>
-    <img id="photo" src="images/moment1.jpg" alt="Momento Especial">
+    <div id="media-container">
+        <img id="photo" style="display: none;">
+        <video id="video" style="display: none;" controls></video>
+    </div>
     <br>
-    <iframe id="spotify" src="https://open.spotify.com/embed/track/TU_CANCION_AQUI" width="300" height="80" frameborder="0" allow="autoplay"></iframe>
+    <iframe id="spotify" src="https://open.spotify.com/embed/track/TU_CANCION_AQUI" width="300" height="80" frameborder="0" allow="encrypted-media"></iframe>
+    <br>
+    <button id="playBtn" class="play" onclick="playSpotify()">▶ Reproducir Música</button>
     <br>
     <button class="prev" id="prevBtn" onclick="prevMoment()" style="display: none;">Atrás</button>
     <button class="next" id="nextBtn" onclick="nextMoment()">Siguiente</button>
-
+    <br>
+    <p id="footer" class="footer"></p>
+    
     <script>
-        const moments = [
-            { img: "images/1.jpg", song: "https://open.spotify.com/embed/track/4WefXOf8I4gMjdj2kBJgkl?si=4a6c255c2d384051" },
-            { img: "images/3.jpg", song: "https://open.spotify.com/embed/track/31nfdEooLEq7dn3UMcIeB5?si=e72f0dd9589d444b" },
-            // Agrega más momentos aquí
-        ];
+        const moments = [];
+        for (let i = 1; i <= 40; i++) {
+            if (i !== 7) {
+                moments.push({
+                    type: i % 2 === 0 ? "video" : "image",
+                    src: `images/${i}.${i % 2 === 0 ? 'mp4' : 'jpg'}`,
+                    song: `https://open.spotify.com/embed/track/TU_CANCION_${i}`,
+                    description: `Descripción del momento ${i}.`
+                });
+            }
+        }
         
         let index = 0;
+        
         function updateMoment() {
-            document.getElementById("photo").src = moments[index].img;
+            let imageElement = document.getElementById("photo");
+            let videoElement = document.getElementById("video");
             let spotifyFrame = document.getElementById("spotify");
-            spotifyFrame.src = moments[index].song; 
-        
-            // Forzar recarga del iframe después de un pequeño retraso
-            setTimeout(() => {
-                spotifyFrame.src = moments[index].song;
-            }, 100); 
-        
+            let footerElement = document.getElementById("footer");
+
+            if (moments[index].type === "image") {
+                imageElement.src = moments[index].src;
+                imageElement.style.display = "block";
+                videoElement.style.display = "none";
+            } else if (moments[index].type === "video") {
+                videoElement.src = moments[index].src;
+                videoElement.style.display = "block";
+                imageElement.style.display = "none";
+                videoElement.play();
+            }
+            
+            spotifyFrame.src = moments[index].song;
+            footerElement.innerText = moments[index].description;
             document.getElementById("prevBtn").style.display = index > 0 ? "inline-block" : "none";
             document.getElementById("nextBtn").style.display = index < moments.length - 1 ? "inline-block" : "none";
         }
         
-        // Llamamos a updateMoment() al cargar la página para evitar el fallo inicial
-        updateMoment();
-
+        function playSpotify() {
+            let spotifyFrame = document.getElementById("spotify");
+            let currentSrc = spotifyFrame.src;
+            spotifyFrame.src = "";
+            setTimeout(() => {
+                spotifyFrame.src = currentSrc;
+            }, 100);
+            document.getElementById("playBtn").style.display = "none";
+        }
 
         function nextMoment() { index++; updateMoment(); }
         function prevMoment() { index--; updateMoment(); }
+        
+        updateMoment();
     </script>
 </body>
 </html>
