@@ -5,20 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Para Mi Amor 💖</title>
     <style>
-        body { text-align: center; font-family: Arial, sans-serif; background-color: black; color: white; }
-        img, video { max-width: 90%; height: auto; border-radius: 10px; margin-top: 20px; }
-        button { margin: 10px; padding: 10px 20px; font-size: 18px; cursor: pointer; border: none; border-radius: 5px; }
+        body { 
+            text-align: center; 
+            font-family: Arial, sans-serif; 
+            background-color: black; 
+            color: white; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        #media-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 80%;
+            height: 50vh;
+        }
+        img, video { 
+            max-width: 100%; 
+            max-height: 100%; 
+            border-radius: 10px; 
+        }
+        video {
+            object-fit: cover;
+            pointer-events: none;
+            muted: true;
+        }
+        button { 
+            margin: 10px; 
+            padding: 10px 20px; 
+            font-size: 18px; 
+            cursor: pointer; 
+            border: none; 
+            border-radius: 5px; 
+        }
         .prev { background-color: gray; color: white; }
         .next { background-color: red; color: white; }
         .play { background-color: green; color: white; }
-        .footer { margin-top: 20px; font-size: 16px; color: lightgray; }
+        .footer { 
+            margin-top: 10px; 
+            font-size: 16px; 
+            color: lightgray; 
+            width: 80%;
+        }
     </style>
 </head>
 <body>
     <h1>💖 Momentos Juntos 💖</h1>
     <div id="media-container">
         <img id="photo" style="display: none;">
-        <video id="video" style="display: none;" controls></video>
+        <video id="video" style="display: none;" muted playsinline></video>
     </div>
     <br>
     <iframe id="spotify" src="https://open.spotify.com/embed/track/TU_CANCION_AQUI" width="300" height="80" frameborder="0" allow="encrypted-media"></iframe>
