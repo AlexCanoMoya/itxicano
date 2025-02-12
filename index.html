@@ -31,10 +31,21 @@
         let index = 0;
         function updateMoment() {
             document.getElementById("photo").src = moments[index].img;
-            document.getElementById("spotify").src = moments[index].song + "?autoplay=1";
+            let spotifyFrame = document.getElementById("spotify");
+            spotifyFrame.src = moments[index].song; 
+        
+            // Forzar recarga del iframe después de un pequeño retraso
+            setTimeout(() => {
+                spotifyFrame.src = moments[index].song;
+            }, 100); 
+        
             document.getElementById("prevBtn").style.display = index > 0 ? "inline-block" : "none";
             document.getElementById("nextBtn").style.display = index < moments.length - 1 ? "inline-block" : "none";
         }
+        
+        // Llamamos a updateMoment() al cargar la página para evitar el fallo inicial
+        updateMoment();
+
 
         function nextMoment() { index++; updateMoment(); }
         function prevMoment() { index--; updateMoment(); }
