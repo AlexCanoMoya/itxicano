@@ -59,7 +59,7 @@
         <video id="video" style="display: none;" muted playsinline></video>
     </div>
     <br>
-    <iframe id="spotify" src="https://open.spotify.com/embed/track/TU_CANCION_AQUI" width="300" height="80" frameborder="0" allow="encrypted-media"></iframe>
+    <iframe id="spotify" src="" width="300" height="80" frameborder="0" allow="encrypted-media"></iframe>
     <br>
     <button id="playBtn" class="play" onclick="playSpotify()">▶ Reproducir Música</button>
     <br>
@@ -69,13 +69,22 @@
     <p id="footer" class="footer"></p>
     
     <script>
+        const songList = [
+            "https://open.spotify.com/embed/track/SONG_ID_1",
+            "https://open.spotify.com/embed/track/SONG_ID_2",
+            "https://open.spotify.com/embed/track/SONG_ID_3",
+            "https://open.spotify.com/embed/track/SONG_ID_4",
+            "https://open.spotify.com/embed/track/SONG_ID_5"
+            // Agrega más IDs de canciones aquí
+        ];
+        
         const moments = [];
         for (let i = 1; i <= 40; i++) {
             if (i !== 7) {
                 moments.push({
                     type: i % 2 === 0 ? "video" : "image",
                     src: `images/${i}.${i % 2 === 0 ? 'mp4' : 'jpg'}`,
-                    song: `https://open.spotify.com/embed/track/TU_CANCION_${i}`,
+                    song: songList[(i - 1) % songList.length],
                     description: `Descripción del momento ${i}.`
                 });
             }
