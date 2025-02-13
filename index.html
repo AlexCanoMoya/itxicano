@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Mi Amor 💖</title>
+    <title> Apapáchame la vida entera... 💖</title>
     <style>
         body { 
             text-align: center; 
@@ -50,10 +50,16 @@
             color: lightgray; 
             width: 80%;
         }
+        .description {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
-    <h1>💖 Momentos Juntos 💖</h1>
+    <h1 id="title">💖 Momentos Juntos 💖</h1>
+    <p id="description" class="description"></p>
     <div id="media-container">
         <img id="photo" style="display: none;">
         <video id="video" style="display: none;" muted playsinline></video>
@@ -61,34 +67,86 @@
     <br>
     <iframe id="spotify" src="" width="300" height="80" frameborder="0" allow="encrypted-media"></iframe>
     <br>
-    <button id="playBtn" class="play" onclick="playSpotify()">▶ Reproducir Música</button>
+    <audio id="silentAudio" src="silent.mp3" autoplay loop></audio>
+    <button id="playBtn" class="play" onclick="playSpotify()">▶ Iniciar Música</button>
     <br>
     <button class="prev" id="prevBtn" onclick="prevMoment()" style="display: none;">Atrás</button>
     <button class="next" id="nextBtn" onclick="nextMoment()">Siguiente</button>
     <br>
     <p id="footer" class="footer"></p>
-    
+	
     <script>
         const songList = [
             "https://open.spotify.com/embed/track/4WefXOf8I4gMjdj2kBJgkl?si=52f6470ac493400a",
             "https://open.spotify.com/embed/track/31nfdEooLEq7dn3UMcIeB5?si=25bbf86968ec4937",
-            "https://open.spotify.com/embed/track/SONG_ID_3",
-            "https://open.spotify.com/embed/track/SONG_ID_4",
-            "https://open.spotify.com/embed/track/SONG_ID_5"
-            // Agrega más IDs de canciones aquí
+            "https://open.spotify.com/embed/track/4DndSKZKWXbbBxi5lO4QUP?si=99ac71a3533d447e",
+            "https://open.spotify.com/embed/track/1BJJbSX6muJVF2AK7uH1x4?si=ac1ea84b1ce74718",
+            "https://open.spotify.com/embed/track/0r3nMF80NSIuPIxeod4aoG?si=ff2c86fb7fa243db",
+            "https://open.spotify.com/embed/track/5nPbKG04fhLkIAjcPFaZq7?si=dbd17c4c39124e85",
+            "https://open.spotify.com/embed/track/561pBFcFL2Pwb9HPO9tU8J?si=71f734ca09ec4538",
+            "https://open.spotify.com/embed/track/561pBFcFL2Pwb9HPO9tU8J?si=71f734ca09ec4538",
+            "https://open.spotify.com/embed/track/6H518neJY8BB6OW8fygzvV?si=966635c1dcf64997",
+            "https://open.spotify.com/embed/track/2cEJWlUVPcl72Coc7tYwz2?si=34998727ef86437c",
+            "https://open.spotify.com/embed/track/6Vk4TNnM4QeN4fneglTLa4?si=1c916ff688c64ba4",
+            "https://open.spotify.com/embed/track/3YgtkOxZsTuaZdL8McA1FQ?si=439423a780254e97",
+            "https://open.spotify.com/embed/track/1c4R7VEZSRIqO2eGR9LKXX?si=54a8cd2204204ab2",
+            "https://open.spotify.com/embed/track/1pymWRCuZfCd0zdiBJo0Hj?si=f7051491b17f4a9a",
+            "https://open.spotify.com/embed/track/57f0ili5EzdZlEaSKcEg8p?si=dbd03361109e48f1",
+            "https://open.spotify.com/embed/track/6nqBOGRwYdwOOHTie3fx1K?si=7d8bb6eeb84d4d8b",
+            "https://open.spotify.com/embed/track/6e0CvGZf7CouOpYF8toXHC?si=3cf98f7aa93841db",
+            "https://open.spotify.com/embed/track/7JIjUx3GsL0upxmNJacmtz?si=b2730c9ec73a44eb",
+            "https://open.spotify.com/embed/track/6kTwzV93qpcovlRPmBOXmn?si=06405bcf2d994fb8",
+            "https://open.spotify.com/embed/track/14S2VMZRhekYGluotZ4pqg?si=d781e4911d1a447b",
+            "https://open.spotify.com/embed/track/4BdFCoLuJ7I0nW6auc34l4?si=4473ed1cda8d49d5",
+            "https://open.spotify.com/embed/track/0D8UyIeSynjUN7ACH7nPKM?si=dc99d35158624568",
+            "https://open.spotify.com/embed/track/4BdFCoLuJ7I0nW6auc34l4?si=4473ed1cda8d49d5",
+            "https://open.spotify.com/embed/track/59tcQJiHwApzE4h6yVnL9i?si=fc5815ce7c9743d4",
+            "https://open.spotify.com/embed/track/5zHmPAoPdCkkcMIZ8GaoyS?si=0082fc33af304c3e",
+            "https://open.spotify.com/embed/track/5BfmbGA0K89froxm1kNBF1?si=f7540b4981f94c11",
+            "https://open.spotify.com/embed/track/0xoYZ45fgTfyQYREZPN7Sa?si=b6850f3a21c446a2",
+            "https://open.spotify.com/embed/track/3j2T0B53Hw4Ky4w4iXTGnt?si=f63850c273524e23",
+            "https://open.spotify.com/embed/track/2fD4c3tQ8vxa7m06OGiKCQ?si=6056f1cfed7d455d",
+            "https://open.spotify.com/embed/track/2xpeEb2moFy7dRinc7tUnz?si=88c8e83f63ba4326",
+            "https://open.spotify.com/embed/track/0Az99LafZRlNEzlwVE7xsq?si=a8eb9f0c825546eb",
+            "https://open.spotify.com/embed/track/5cyElly6QbIcbBiRZIT63F?si=a76c7bf00f304311",
+            "https://open.spotify.com/embed/track/0aVrpFRLlrd5zVyPXWP3mS?si=17aacdbf383b44f0",
+            "https://open.spotify.com/embed/track/4BdFCoLuJ7I0nW6auc34l4?si=c26df39ec14a4c61",
+            "https://open.spotify.com/embed/track/2cEJWlUVPcl72Coc7tYwz2?si=cde7f25567354b63",
+            "hhttps://open.spotify.com/embed/track/0OJLlX1KvSpHqXsHPvxyX9?si=bb314a3875d442f6",
+            "https://open.spotify.com/embed/track/4lKxtC2oNjlhYk1yh6tyCK?si=210d91dea9b844d9",
+            "https://open.spotify.com/embed/track/01km0N5v4vhwqFyW4H1X0n?si=31b14e09cc634687",
+            "https://open.spotify.com/embed/track/2fD4c3tQ8vxa7m06OGiKCQ?si=3c8367eac9c64626",
+            "https://open.spotify.com/embed/track/1fFu4J4awCBu1zuwyLrWWh?si=71721590af3445da"
         ];
         
-        const moments = [];
-        for (let i = 1; i <= 40; i++) {
-            if (i !== 7) {
-                moments.push({
-                    type: i % 2 === 0 ? "video" : "image",
-                    src: `images/${i}.${i % 2 === 0 ? 'mp4' : 'jpg'}`,
-                    song: songList[(i - 1) % songList.length],
-                    description: `Descripción del momento ${i}.`
-                });
-            }
-        }
+        const videoFiles = [2, 4, 6, 10, 17, 18, 26, 29, 31, 32];
+		const momentData = {
+			1: { title: "Nuestro Primer Encuentro", description: "El día que nuestras miradas se cruzaron por primera vez." },
+			2: { title: "Nuestra Primera Aventura", description: "Un viaje inolvidable que marcó el inicio de muchas más aventuras." },
+			3: { title: "Un Día Especial", description: "La primera vez que hicimos algo realmente inesperado." },
+			4: { title: "Risas y Diversión", description: "Ese momento en el que no podíamos parar de reír." },
+			5: { title: "Nuestra Canción", description: "La canción que siempre nos recordará a este momento especial." },
+			6: { title: "Día de Película", description: "Una noche perfecta viendo nuestras películas favoritas." },
+			8: { title: "Aventura en la Naturaleza", description: "Ese paseo donde la naturaleza nos rodeó con su magia." },
+			9: { title: "Nuestro Lugar Favorito", description: "Ese rincón especial donde siempre encontramos paz." },
+			10: { title: "Baile Bajo las Estrellas", description: "Bailamos como si nadie nos estuviera mirando." },
+			11: { title: "Cena Romántica", description: "Una velada especial solo para nosotros dos." },
+			12: { title: "Ese Abrazo Inolvidable", description: "El momento en el que un abrazo dijo más que mil palabras." },
+			// Añade los títulos y descripciones personalizados para cada momento...
+		};
+
+		const moments = [];
+		for (let i = 1; i <= 40; i++) {
+			if (i !== 7) {
+				moments.push({
+					type: videoFiles.includes(i) ? "video" : "image",
+					src: `images/${i}.${videoFiles.includes(i) ? 'mp4' : 'jpg'}`,
+					song: songList[(i - 1) % songList.length],
+					title: momentData[i]?.title || `Título del momento ${i}`, // Usa título personalizado o un título genérico
+					description: momentData[i]?.description || `Descripción personalizada del momento ${i}.` // Usa descripción personalizada o una por defecto
+				});
+			}
+		}
         
         let index = 0;
         
@@ -97,9 +155,14 @@
             let videoElement = document.getElementById("video");
             let spotifyFrame = document.getElementById("spotify");
             let footerElement = document.getElementById("footer");
+            let titleElement = document.getElementById("title");
+            let descriptionElement = document.getElementById("description");
+
+            titleElement.innerText = moments[index].title;
+            descriptionElement.innerText = moments[index].description;
 
             if (moments[index].type === "image") {
-                imageElement.src = moments[index].src;
+                imageElement.src = moments[index].src + "?t=" + new Date().getTime();
                 imageElement.style.display = "block";
                 videoElement.style.display = "none";
             } else if (moments[index].type === "video") {
@@ -117,16 +180,16 @@
         
         function playSpotify() {
             let spotifyFrame = document.getElementById("spotify");
-            let currentSrc = spotifyFrame.src;
-            spotifyFrame.src = "";
-            setTimeout(() => {
-                spotifyFrame.src = currentSrc;
-            }, 100);
+            spotifyFrame.src = moments[index].song;
             document.getElementById("playBtn").style.display = "none";
         }
 
         function nextMoment() { index++; updateMoment(); }
         function prevMoment() { index--; updateMoment(); }
+        
+        setTimeout(() => {
+            document.getElementById("spotify").src = moments[index].song;
+        }, 2000);
         
         updateMoment();
     </script>
