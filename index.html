@@ -58,7 +58,7 @@
     </style>
 </head>
 <body>
-    <h1 id="title">💖 Momentos Juntos 💖</h1>
+    <h1 id="title">🤍 Momentos Juntos 🤍</h1>
     <p id="description" class="description"></p>
     <div id="media-container">
         <img id="photo" style="display: none;">
@@ -121,18 +121,45 @@
         
         const videoFiles = [2, 4, 6, 10, 17, 18, 26, 29, 31, 32];
 		const momentData = {
-			1: { title: "Nuestro Primer Encuentro", description: "El día que nuestras miradas se cruzaron por primera vez." },
-			2: { title: "Nuestra Primera Aventura", description: "Un viaje inolvidable que marcó el inicio de muchas más aventuras." },
-			3: { title: "Un Día Especial", description: "La primera vez que hicimos algo realmente inesperado." },
-			4: { title: "Risas y Diversión", description: "Ese momento en el que no podíamos parar de reír." },
-			5: { title: "Nuestra Canción", description: "La canción que siempre nos recordará a este momento especial." },
-			6: { title: "Día de Película", description: "Una noche perfecta viendo nuestras películas favoritas." },
-			8: { title: "Aventura en la Naturaleza", description: "Ese paseo donde la naturaleza nos rodeó con su magia." },
-			9: { title: "Nuestro Lugar Favorito", description: "Ese rincón especial donde siempre encontramos paz." },
-			10: { title: "Baile Bajo las Estrellas", description: "Bailamos como si nadie nos estuviera mirando." },
-			11: { title: "Cena Romántica", description: "Una velada especial solo para nosotros dos." },
-			12: { title: "Ese Abrazo Inolvidable", description: "El momento en el que un abrazo dijo más que mil palabras." },
-			// Añade los títulos y descripciones personalizados para cada momento...
+			1: { title: "Donde empezó todo", description: "Quién nos iba a decir que una noche random iba a ser el desencadenante de todo esto. Según se cruzaron nuestras miradas ambos supimos que ahí había algo." },
+			2: { title: "Aquél bendito Uber", description: "Podrían haber pasado muchas cosas, pero la casualidad de una canción nos llevó lejos... Also, highlight de la noche:" },
+			3: { title: "A las pruebas me remito", description: "Uno de los mejores fines de semana que recuerdo. Conversaciones profundas, conversaciones imbéciles, música, conexiones... y muy pocas horas de sueño." },
+			4: { title: "Move", description: "Y tu manera de moverte no se me fue jamás de la cabeza." },
+			5: { title: "Londres pt.1", description: "Y, ¿sabes qué tampoco se me fue de la cabeza? ese beso de tu boca, que me hizo irme a Londres en el que pasé otro de los mejores fines de semana de mi vida. Ahí me di cuenta de que estaba a tus pies... literalmente." },
+			6: { title: "Cause you know baby I adore you...", description: "La noche del año. Cantar cabeza con cabeza. Comernos la boca como si no hubiera un mañana... La conexión ya era imposible de no ver." },
+			8: { title: "😅", description: "Jejejeje." },
+			9: { title: "Y aunque hubo momentos difíciles, tuvimos la suerte de tenernos el uno al otro", description: "Amén Jesús, ¡grande!" },
+			10: { title: "Madrid pt.1", description: "Y de repente mi mundo se complementa totalmente cuando vienes llegas a él. Gracias por inspirarme y por hacerme sentir pleno." },
+			11: { title: "La prueba de fuego", description: "Aunque me sentía pleno, tenías que pasar la prueba de la Cora. Y la pasaste con creces." },
+			12: { title: "Y de repente, empezó el 'adore u'", description: "Qué bueno tener unos amigos tan geniales que con un espejo tan chulo para hacer poses 😂" },
+			13: { title: "Londres pt.2", description: "Efectivamente, solo tengo fotos mías jajaja. Así que aprovecho esto para darte las gracias por verme como me ves y sacarme tan guapo :D." },
+			14: { title: "Real gangsta love'", description: "Qué bonito es tenernos. Te adoro." },
+			15: { title: "Amansando a la fiera 😏", description: "Sí, tenía que poner esta foto." },
+			16: { title: "It's like I'm learning how to love again...", description: "¿Dónde estaba la prudencia ahí ya? No lo sé, pero ya me daba igual." },
+			17: { title: "Porque además de todo lo bueno que nos dábamos, a una edad ya uno piensa en lo rico que nos cocinamos el uno al otro", description: " " },
+			18: { title: "... y lo rico que nos comemos", description: "😏" },
+			19: { title: "Best concert ever: Bob Sinclair", description: "Aunque nos lo pasamos bastante bien y tuvimos una fan que tuvo crisis de pareja... siempre nos pasa algo." },
+			20: { title: "Y además, esa noche lo dijimos:", description: "'Te quiero'." },
+			21: { title: "'Ponte bañador', 'espero que no llueva'", description: "Ahí te diste cuenta de que a pesar de mi cara de malote, era un ingenuo." },
+			22: { title: "Y aunque las vistas eran buenas", description: "Ninguna superaba a las que yo tenía delante." },
+			23: { title: "Foto moñas", description: "Lo sé, foto moñas." },
+			24: { title: "Y plan tras plan, sorpresa tras sorpresa... Al menos también te lié bastante", description: "Ah, y fue la noche del '¿¿y es guapo??', ¡grande la Mary también!" },
+			25: { title: "Y repito, qué suerte la mía de tener esto contigo", description: " " },
+			26: { title: "'You guys give me hope!'", description: "Me encanta este vídeo 😏" },
+			27: { title: "Y a pesar de la distancia", description: "🥹" },
+			28: { title: "...la puta distancia", description: " :( " },
+			29: { title: "Me has inspirado a empezar a cumplir mis sueños", description: "Y me has hecho sentir validado en todos los aspectos como nunca." },
+			30: { title: "Y mención especial a tu arte", description: "Te lo recordaré mil veces, eres una artista." },
+			31: { title: "Bye London!", description: "Best regalo de despedida ever 😂😂😂. Se nota que te quiere la gente a la que tocas con tu alma" },
+			32: { title: "Madrid again...", description: "Y se nota mucho que la gente te quiere, porque eres amor puro." },
+			33: { title: "Por eso pienso que eres un milagro", description: " " },
+			34: { title: "Y te quiero", description: " " },
+			35: { title: "Y da igual si es en Madrid, en Londres, en Barcelona, en Tenerife o donde sea", description: "Lo importante es contigo." },
+			36: { title: "CALVO CON BARBA", description: "CALVO CON BARBA, CALVO CON BARBA, CALVO CON BARBA, SI TIENE PENDIENTE TIRA PA TU CASA." },
+			37: { title: "Hemos pasado nuestra primera no-nochevieja", description: "HOLIIIIIIIIII, YA ESTOY DESPIERTIIIIII." },
+			38: { title: "Y tu primer cumpleaños juntos", description: "Sí, tu 37 cumpleaños." },
+			39: { title: "¡¡¡Y LA SALIDA DE MI PRIMER EP!!!", description: "Y fíjate si has sido parte de esto que estás en la portada y en el título." },
+			40: { title: "Y Madrid pt.3 de...", description: "Y después de tanta aventura juntos... Lo nuestro acaba de comenzar. Por muchas más historias, momentos y recuerdos juntos. Te quiero 🤍." },
 		};
 
 		const moments = [];
