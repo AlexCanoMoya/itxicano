@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Apapáchame la vida entera... 💖</title>
+    <title> Apapáchame la vida entera... 🤍</title>
     <style>
         body { 
             text-align: center; 
@@ -70,7 +70,7 @@
 </head>
 <body>
     <canvas id="particleCanvas"></canvas>
-    <h1 id="title">💖 Momentos Juntos 💖</h1>
+    <h1 id="title">🤍 Momentos Juntos 🤍</h1>
     <p id="description" class="description"></p>
     <div id="media-container">
         <img id="photo" style="display: none;">
@@ -85,49 +85,159 @@
     <button class="next" id="nextBtn" onclick="nextMoment()">Siguiente</button>
     <br>
     <p id="footer" class="footer"></p>
-
+	
     <script>
-        const videoElement = document.getElementById("video");
-        videoElement.setAttribute("loop", "true");
+        const songList = [
+            "https://open.spotify.com/embed/track/4WefXOf8I4gMjdj2kBJgkl?si=52f6470ac493400a",
+            "https://open.spotify.com/embed/track/31nfdEooLEq7dn3UMcIeB5?si=25bbf86968ec4937",
+            "https://open.spotify.com/embed/track/4DndSKZKWXbbBxi5lO4QUP?si=99ac71a3533d447e",
+            "https://open.spotify.com/embed/track/1BJJbSX6muJVF2AK7uH1x4?si=ac1ea84b1ce74718",
+            "https://open.spotify.com/embed/track/0r3nMF80NSIuPIxeod4aoG?si=ff2c86fb7fa243db",
+            "https://open.spotify.com/embed/track/5nPbKG04fhLkIAjcPFaZq7?si=dbd17c4c39124e85",
+            "https://open.spotify.com/embed/track/561pBFcFL2Pwb9HPO9tU8J?si=71f734ca09ec4538",
+            "https://open.spotify.com/embed/track/561pBFcFL2Pwb9HPO9tU8J?si=71f734ca09ec4538",
+            "https://open.spotify.com/embed/track/6H518neJY8BB6OW8fygzvV?si=966635c1dcf64997",
+            "https://open.spotify.com/embed/track/2cEJWlUVPcl72Coc7tYwz2?si=34998727ef86437c",
+            "https://open.spotify.com/embed/track/6Vk4TNnM4QeN4fneglTLa4?si=1c916ff688c64ba4",
+            "https://open.spotify.com/embed/track/3YgtkOxZsTuaZdL8McA1FQ?si=439423a780254e97",
+            "https://open.spotify.com/embed/track/1c4R7VEZSRIqO2eGR9LKXX?si=54a8cd2204204ab2",
+            "https://open.spotify.com/embed/track/1pymWRCuZfCd0zdiBJo0Hj?si=f7051491b17f4a9a",
+            "https://open.spotify.com/embed/track/57f0ili5EzdZlEaSKcEg8p?si=dbd03361109e48f1",
+            "https://open.spotify.com/embed/track/6nqBOGRwYdwOOHTie3fx1K?si=7d8bb6eeb84d4d8b",
+            "https://open.spotify.com/embed/track/6e0CvGZf7CouOpYF8toXHC?si=3cf98f7aa93841db",
+            "https://open.spotify.com/embed/track/7JIjUx3GsL0upxmNJacmtz?si=b2730c9ec73a44eb",
+            "https://open.spotify.com/embed/track/6kTwzV93qpcovlRPmBOXmn?si=06405bcf2d994fb8",
+            "https://open.spotify.com/embed/track/14S2VMZRhekYGluotZ4pqg?si=d781e4911d1a447b",
+            "https://open.spotify.com/embed/track/4BdFCoLuJ7I0nW6auc34l4?si=4473ed1cda8d49d5",
+            "https://open.spotify.com/embed/track/0D8UyIeSynjUN7ACH7nPKM?si=dc99d35158624568",
+            "https://open.spotify.com/embed/track/4BdFCoLuJ7I0nW6auc34l4?si=4473ed1cda8d49d5",
+            "https://open.spotify.com/embed/track/59tcQJiHwApzE4h6yVnL9i?si=fc5815ce7c9743d4",
+            "https://open.spotify.com/embed/track/5zHmPAoPdCkkcMIZ8GaoyS?si=0082fc33af304c3e",
+            "https://open.spotify.com/embed/track/5BfmbGA0K89froxm1kNBF1?si=f7540b4981f94c11",
+            "https://open.spotify.com/embed/track/0xoYZ45fgTfyQYREZPN7Sa?si=b6850f3a21c446a2",
+            "https://open.spotify.com/embed/track/3j2T0B53Hw4Ky4w4iXTGnt?si=f63850c273524e23",
+            "https://open.spotify.com/embed/track/2fD4c3tQ8vxa7m06OGiKCQ?si=6056f1cfed7d455d",
+            "https://open.spotify.com/embed/track/2xpeEb2moFy7dRinc7tUnz?si=88c8e83f63ba4326",
+            "https://open.spotify.com/embed/track/0Az99LafZRlNEzlwVE7xsq?si=a8eb9f0c825546eb",
+            "https://open.spotify.com/embed/track/5cyElly6QbIcbBiRZIT63F?si=a76c7bf00f304311",
+            "https://open.spotify.com/embed/track/0aVrpFRLlrd5zVyPXWP3mS?si=17aacdbf383b44f0",
+            "https://open.spotify.com/embed/track/4BdFCoLuJ7I0nW6auc34l4?si=c26df39ec14a4c61",
+            "https://open.spotify.com/embed/track/2cEJWlUVPcl72Coc7tYwz2?si=cde7f25567354b63",
+            "hhttps://open.spotify.com/embed/track/0OJLlX1KvSpHqXsHPvxyX9?si=bb314a3875d442f6",
+            "https://open.spotify.com/embed/track/4lKxtC2oNjlhYk1yh6tyCK?si=210d91dea9b844d9",
+            "https://open.spotify.com/embed/track/01km0N5v4vhwqFyW4H1X0n?si=31b14e09cc634687",
+            "https://open.spotify.com/embed/track/2fD4c3tQ8vxa7m06OGiKCQ?si=3c8367eac9c64626",
+            "https://open.spotify.com/embed/track/1fFu4J4awCBu1zuwyLrWWh?si=71721590af3445da"
+        ];
         
-        function playSpotify() {
-            let spotifyFrame = document.getElementById("spotify");
-            spotifyFrame.src = moments[index].song;
-            document.getElementById("playBtn").style.display = "none";
-        }
+        const videoFiles = [2, 4, 6, 10, 17, 18, 26, 29, 31, 32];
+		const momentData = {
+			1: { title: "Donde empezó todo", description: "Quién nos iba a decir que una noche random iba a ser el desencadenante de todo esto. Según se cruzaron nuestras miradas ambos supimos que ahí había algo." },
+			2: { title: "Aquél bendito Uber", description: "Podrían haber pasado muchas cosas, pero la casualidad de una canción nos llevó lejos... Also, highlight de la noche:" },
+			3: { title: "A las pruebas me remito", description: "Uno de los mejores fines de semana que recuerdo. Conversaciones profundas, conversaciones imbéciles, música, conexiones... y muy pocas horas de sueño." },
+			4: { title: "Move", description: "Y tu manera de moverte no se me fue jamás de la cabeza." },
+			5: { title: "Londres pt.1", description: "Y, ¿sabes qué tampoco se me fue de la cabeza? ese beso de tu boca, que me hizo irme a Londres en el que pasé otro de los mejores fines de semana de mi vida. Ahí me di cuenta de que estaba a tus pies... literalmente." },
+			6: { title: "Cause you know baby I adore you...", description: "La noche del año. Cantar cabeza con cabeza. Comernos la boca como si no hubiera un mañana... La conexión ya era imposible de no ver." },
+			8: { title: "😅", description: "Jejejeje." },
+			9: { title: "Y aunque hubo momentos difíciles, tuvimos la suerte de tenernos el uno al otro", description: "Amén Jesús, ¡grande!" },
+			10: { title: "Madrid pt.1", description: "Y de repente mi mundo se complementa totalmente cuando vienes llegas a él. Gracias por inspirarme y por hacerme sentir pleno." },
+			11: { title: "La prueba de fuego", description: "Aunque me sentía pleno, tenías que pasar la prueba de la Cora. Y la pasaste con creces." },
+			12: { title: "Y de repente, empezó el 'adore u'", description: "Qué bueno tener unos amigos tan geniales que con un espejo tan chulo para hacer poses 😂" },
+			13: { title: "Londres pt.2", description: "Efectivamente, solo tengo fotos mías jajaja. Así que aprovecho esto para darte las gracias por verme como me ves y sacarme tan guapo :D." },
+			14: { title: "Real gangsta love'", description: "Qué bonito es tenernos. Te adoro." },
+			15: { title: "Amansando a la fiera 😏", description: "Sí, tenía que poner esta foto." },
+			16: { title: "It's like I'm learning how to love again...", description: "¿Dónde estaba la prudencia ahí ya? No lo sé, pero ya me daba igual." },
+			17: { title: "Porque además de todo lo bueno que nos dábamos, a una edad ya uno piensa en lo rico que nos cocinamos el uno al otro", description: " " },
+			18: { title: "... y lo rico que nos comemos", description: "😏" },
+			19: { title: "Best concert ever: Bob Sinclair", description: "Aunque nos lo pasamos bastante bien y tuvimos una fan que tuvo crisis de pareja... siempre nos pasa algo." },
+			20: { title: "Y además, esa noche lo dijimos:", description: "'Te quiero'." },
+			21: { title: "'Ponte bañador', 'espero que no llueva'", description: "Ahí te diste cuenta de que a pesar de mi cara de malote, era un ingenuo." },
+			22: { title: "Y aunque las vistas eran buenas", description: "Ninguna superaba a las que yo tenía delante." },
+			23: { title: "Foto moñas", description: "Lo sé, foto moñas." },
+			24: { title: "Y plan tras plan, sorpresa tras sorpresa... Al menos también te lié bastante", description: "Ah, y fue la noche del '¿¿y es guapo??', ¡grande la Mary también!" },
+			25: { title: "Y repito, qué suerte la mía de tener esto contigo", description: " " },
+			26: { title: "'You guys give me hope!'", description: "Me encanta este vídeo 😏" },
+			27: { title: "Y a pesar de la distancia", description: "🥹" },
+			28: { title: "...la puta distancia", description: " :( " },
+			29: { title: "Me has inspirado a empezar a cumplir mis sueños", description: "Y me has hecho sentir validado en todos los aspectos como nunca." },
+			30: { title: "Y mención especial a tu arte", description: "Te lo recordaré mil veces, eres una artista." },
+			31: { title: "Bye London!", description: "Best regalo de despedida ever 😂😂😂. Se nota que te quiere la gente a la que tocas con tu alma" },
+			32: { title: "Madrid again...", description: "Y se nota mucho que la gente te quiere, porque eres amor puro." },
+			33: { title: "Por eso pienso que eres un milagro", description: " " },
+			34: { title: "Y te quiero", description: " " },
+			35: { title: "Y da igual si es en Madrid, en Londres, en Barcelona, en Tenerife o donde sea", description: "Lo importante es contigo." },
+			36: { title: "CALVO CON BARBA", description: "CALVO CON BARBA, CALVO CON BARBA, CALVO CON BARBA, SI TIENE PENDIENTE TIRA PA TU CASA." },
+			37: { title: "Hemos pasado nuestra primera no-nochevieja", description: "HOLIIIIIIIIII, YA ESTOY DESPIERTIIIIII." },
+			38: { title: "Y tu primer cumpleaños juntos", description: "Sí, tu 37 cumpleaños." },
+			39: { title: "¡¡¡Y LA SALIDA DE MI PRIMER EP!!!", description: "Y fíjate si has sido parte de esto que estás en la portada y en el título." },
+			40: { title: "Y Madrid pt.3 de...", description: "Y después de tanta aventura juntos... Lo nuestro acaba de comenzar. Por muchas más historias, momentos y recuerdos juntos. Te quiero 🤍." },
+		};
 
-        function updateMoment() {
-            let imageElement = document.getElementById("photo");
-            let videoElement = document.getElementById("video");
-            let spotifyFrame = document.getElementById("spotify");
-            let footerElement = document.getElementById("footer");
-            let titleElement = document.getElementById("title");
-            let descriptionElement = document.getElementById("description");
+		const moments = [];
+		for (let i = 1; i <= 40; i++) {
+			if (i !== 7) {
+				moments.push({
+					type: videoFiles.includes(i) ? "video" : "image",
+					src: `images/${i}.${videoFiles.includes(i) ? 'mp4' : 'jpg'}`,
+					song: songList[(i - 1) % songList.length],
+					title: momentData[i]?.title || `Título del momento ${i}`, // Usa título personalizado o un título genérico
+					description: momentData[i]?.description || `Descripción personalizada del momento ${i}.` // Usa descripción personalizada o una por defecto
+				});
+			}
+		}
+        
+        let index = 0;
+        
+		function playSpotify() {
+			let spotifyFrame = document.getElementById("spotify");
+			spotifyFrame.src = moments[index].song;
+			document.getElementById("playBtn").style.display = "none";
 
-            titleElement.innerText = moments[index].title;
-            descriptionElement.innerText = moments[index].description;
+			// Intento de reproducción automática usando postMessage (algunos navegadores lo bloquean)
+			setTimeout(() => {
+				spotifyFrame.contentWindow.postMessage({ command: 'play' }, '*');
+			}, 1000);
+		}
 
-            if (moments[index].type === "image") {
-                imageElement.src = moments[index].src;
-                imageElement.style.display = "block";
-                videoElement.style.display = "none";
-            } else if (moments[index].type === "video") {
-                videoElement.src = moments[index].src;
-                videoElement.style.display = "block";
-                imageElement.style.display = "none";
-                videoElement.play();
-            }
-            
-            spotifyFrame.src = moments[index].song;
-            footerElement.innerText = moments[index].description;
-            document.getElementById("prevBtn").style.display = index > 0 ? "inline-block" : "none";
-            document.getElementById("nextBtn").style.display = index < moments.length - 1 ? "inline-block" : "none";
-        }
+		function updateMoment() {
+			let imageElement = document.getElementById("photo");
+			let videoElement = document.getElementById("video");
+			let spotifyFrame = document.getElementById("spotify");
+			let footerElement = document.getElementById("footer");
+			let titleElement = document.getElementById("title");
+			let descriptionElement = document.getElementById("description");
+
+			titleElement.innerText = moments[index].title;
+			descriptionElement.innerText = moments[index].description;
+
+			if (moments[index].type === "image") {
+				imageElement.src = moments[index].src;
+				imageElement.style.display = "block";
+				videoElement.style.display = "none";
+			} else if (moments[index].type === "video") {
+				videoElement.src = moments[index].src;
+				videoElement.style.display = "block";
+				imageElement.style.display = "none";
+				videoElement.play();
+			}
+
+			// Forzar la carga de la nueva canción en Spotify
+			spotifyFrame.src = moments[index].song;
+
+			// Intentar reproducir automáticamente
+			setTimeout(() => {
+				spotifyFrame.contentWindow.postMessage({ command: 'play' }, '*');
+			}, 1000);
+
+			footerElement.innerText = moments[index].description;
+			document.getElementById("prevBtn").style.display = index > 0 ? "inline-block" : "none";
+			document.getElementById("nextBtn").style.display = index < moments.length - 1 ? "inline-block" : "none";
+}
+
 
         function nextMoment() { index++; updateMoment(); }
         function prevMoment() { index--; updateMoment(); }
         
-        // Partículas de fondo
         const canvas = document.getElementById("particleCanvas");
         const ctx = canvas.getContext("2d");
         canvas.width = window.innerWidth;
